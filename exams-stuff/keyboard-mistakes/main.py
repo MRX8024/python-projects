@@ -1,23 +1,37 @@
 import os
 HOME_DIR = './'
-FILE_PATH = os.path.expanduser(f'{HOME_DIR}/data1.txt')
+FILE_PATH = os.path.expanduser(f'{HOME_DIR}/data.txt')
+
+def results(users):
+    result = []
+    max_points = max(users[user]['total_points'] for user in users)
+    result.append(max_points)
+    for user in reversed(users):
+        if users[user]['total_points'] == max_points:
+            result.append(f"{user:<10} {users[user]['city']}")
+    if any(users[user]['mistake'] > 5 for user in users):
+        result.append('Diskvalifikuoti:')
+    for user in users:
+        if users[user]['mistake'] > 5:
+            result.append(f"{user:<10}")
+    return result
 
 users = {}
-line = 0
-
 with open(FILE_PATH, 'r') as file:
-    city_count = int(file.readline())
-    k = len(list(file))
-    while k:
-        line += 1
-        data = list(file[line]).strip()
-        city = data.strip(' ')[0]
-        users_ct = data.strip(' ')[1]
-        for user in users_ct:
-            line += 1
-            data = file[line].strip()
-            name = data.strip(' ')[0]
-            nonmistake = data.strip(' ')[1]
-            mistake = data.strip(' ')[2]
-            users[name] = {'nonmistake':nonmistake, 'mistake': mistake}
+    data = file.read().split()
+    city_count = int(data[0])
+    clocker = 1
+    for element in range(city_count):
+        city = data[clocker]
+        users_ct = int(data[clocker + 1])
+        clocker += 2
+        for user in range(users_ct):
+            name = data[clocker]
+            points = int(data[clocker + 1])
+            mistake = int(data[clocker + 2])
+            total_points = points - (mistake * 10)
+            users[name] = {'city': city, 'total_points': total_points, 'mistake': mistake}
+            clocker += 3
 
+for line in results(users):
+    print(line)
