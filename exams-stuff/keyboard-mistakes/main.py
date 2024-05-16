@@ -18,20 +18,18 @@ def results(users):
 
 users = {}
 with open(FILE_PATH, 'r') as file:
-    data = file.read().split()
-    city_count = int(data[0])
-    clocker = 1
-    for element in range(city_count):
-        city = data[clocker]
-        users_ct = int(data[clocker + 1])
-        clocker += 2
-        for user in range(users_ct):
-            name = data[clocker]
-            points = int(data[clocker + 1])
-            mistake = int(data[clocker + 2])
+    lines = file.readlines()
+    city_count = int(lines[0])
+    line_num = 1
+    for _ in range(city_count):
+        city, users_ct = lines[line_num].split()
+        line_num += 1
+        for _ in range(int(users_ct)):
+            name, points, mistake = lines[line_num].split()
+            points, mistake = int(points), int(mistake)
             total_points = points - (mistake * 10)
             users[name] = {'city': city, 'total_points': total_points, 'mistake': mistake}
-            clocker += 3
+            line_num += 1
 
 for line in results(users):
     print(line)
