@@ -1,0 +1,11 @@
+10
+b Vitalij 5 1 2 3 1 1
+c Oleg Renat 4 5 6 7 8
+a Jevgenii 7 8 9 9 9 9 9 9
+b Igor 3 10 1 2
+b German 3 4 5 6
+a Vladislav 6 7 8 9 9 9
+c Alexey 3 9 10 1
+a Nikita 2 3 4
+b Daniil 5 6 7 8 9 9
+a Anastasija 3 8 9 10
