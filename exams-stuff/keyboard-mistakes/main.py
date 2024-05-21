@@ -16,9 +16,9 @@ def results(users):
             result.append(f"{user:<{FIELD_SIZE}} {users[user]['city']}")
     if any(users[user]['mistakes'] > MAX_MISTAKES for user in users):
         result.append('Diskvalifikuoti:')
-    for user in users:
-        if users[user]['mistakes'] > MAX_MISTAKES:
-            result.append(user)
+        for user in users:
+            if users[user]['mistakes'] > MAX_MISTAKES:
+                result.append(user)
     return result
 
 users = {}
