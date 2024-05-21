@@ -1,6 +1,11 @@
 import os
+
 HOME_DIR = './'
-FILE_PATH = os.path.expanduser(f'{HOME_DIR}/data.txt')
+IN_FILE = 'data.txt'
+OUT_FILE = 'out.txt'
+MAX_MISTAKES = 5
+MISTAKES_COEFF = 10
+FIELD_SIZE = 10
 
 def results(users):
     result = []
@@ -8,16 +13,17 @@ def results(users):
     result.append(max_points)
     for user in reversed(users):
         if users[user]['total_points'] == max_points:
-            result.append(f"{user:<10} {users[user]['city']}")
-    if any(users[user]['mistake'] > 5 for user in users):
+            result.append(f"{user:<{FIELD_SIZE}} {users[user]['city']}")
+    if any(users[user]['mistakes'] > MAX_MISTAKES for user in users):
         result.append('Diskvalifikuoti:')
     for user in users:
-        if users[user]['mistake'] > 5:
-            result.append(f"{user:<10}")
+        if users[user]['mistakes'] > MAX_MISTAKES:
+            result.append(user)
     return result
 
 users = {}
-with open(FILE_PATH, 'r') as file:
+in_file_path = os.path.expanduser(f'{HOME_DIR}/{IN_FILE}')
+with open(in_file_path, 'r') as file:
     lines = file.readlines()
     city_count = int(lines[0])
     line_num = 1
@@ -25,11 +31,13 @@ with open(FILE_PATH, 'r') as file:
         city, users_ct = lines[line_num].split()
         line_num += 1
         for _ in range(int(users_ct)):
-            name, points, mistake = lines[line_num].split()
-            points, mistake = int(points), int(mistake)
-            total_points = points - (mistake * 10)
-            users[name] = {'city': city, 'total_points': total_points, 'mistake': mistake}
+            name, points, mistakes = lines[line_num].split()
+            points, mistakes = int(points), int(mistakes)
+            total_points = points - (mistakes * MISTAKES_COEFF)
+            users[name] = {'city': city, 'total_points': total_points, 'mistakes': mistakes}
             line_num += 1
 
-for line in results(users):
-    print(line)
+out_file_path = os.path.expanduser(f'{HOME_DIR}/{OUT_FILE}')
+with open(out_file_path, 'w') as file:
+    for line in results(users):
+        file.write(str(line) + '\n')
