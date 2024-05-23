@@ -1,0 +1,7 @@
+6
+Baltieji vaisiniai 5 3.5
+Megeju 3 6.3
+Zalieji agurkiniai 24 1.15
+Aromatiniai 15 0.57
+Riesutiniai 22 3.48
+Megeju 2 6.2
