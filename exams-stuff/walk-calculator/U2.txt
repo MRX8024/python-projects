@@ -1,0 +1,7 @@
+6
+miesto parkas 20
+paupys 10
+paupys 99
+paupys 5
+miesto parkas 119
+a2345678901234567890 26
