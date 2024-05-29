@@ -26,8 +26,8 @@ with open(in_file_path, 'r') as file:
         else:
             data[name] = len
 
+data = sorted(data.items(), key=lambda item: (-item[1], item[0]))
 out_file_path = os.path.expanduser(f'{HOME_DIR}/{OUT_FILE}')
 with open(out_file_path, 'w') as file:
-    data = dict(sorted(data.items(), key=lambda item: item[1], reverse=True))
-    for name in data:
-        file.write(f"{name:<21}{data[name]}\n")
+    for name, length in data:
+        file.write(f"{name:<20} {length}\n")
