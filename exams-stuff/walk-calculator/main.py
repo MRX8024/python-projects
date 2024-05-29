@@ -11,9 +11,9 @@ with open(in_file_path, 'r') as file:
     for line in file:
         line = line.strip()
         name = []
-        for i in range(3):
+        for i in range(len(line.split(' '))):
             try:
-                len = int(line.split(' ')[i])
+                length = int(line.split(' ')[i])
                 break
             except:
                 name.append(line.split(' ')[i])
@@ -21,10 +21,10 @@ with open(in_file_path, 'r') as file:
         if name in data:
             actual_len = data[name]
             actual_len = int(actual_len)
-            total_len = actual_len + len
+            total_len = actual_len + length
             data[name] = total_len
         else:
-            data[name] = len
+            data[name] = length
 
 data = sorted(data.items(), key=lambda item: (-item[1], item[0]))
 out_file_path = os.path.expanduser(f'{HOME_DIR}/{OUT_FILE}')
