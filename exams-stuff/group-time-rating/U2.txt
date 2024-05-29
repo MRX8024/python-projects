@@ -1,0 +1,15 @@
+3
+4
+Katinas Batuotas 4 25
+Katinas ratuotas 3 59
+Katinas Rainas 4 15
+Katinas Jaunas 6 20
+2
+Katinas Rudas 6 45
+Ktinas Jodas 3 55
+5
+Katinas Baltas 3 58
+Katinas Garuotas 4 2
+Katinas Plikas 4 5
+Katinas Ingas 4 4
+Katinas Trumpas 4 6
