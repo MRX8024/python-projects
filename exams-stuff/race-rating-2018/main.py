@@ -7,33 +7,13 @@ users_data = {}
 finish_data = {}
 
 def _line_parser(line):
-    clear_line = line.strip()
     words = []
-    nums = []
-    for element in clear_line:
-        try:
-            int(element)
-            break
-        except ValueError:
-            words.append(element)
-    skip = False
-    for element in range(len(line)):
-        if skip:
-            skip = False
-            continue
-        try:
-            int(line[element])
-            try:
-                int(line[element + 1])
-                num = int(line[element] + line[element + 1])
-                nums.append(num)
-                skip = True
-            except ValueError:
-                nums.append(int(line[element]))
-        except ValueError:
-            pass
+    for symbol in range(20):
+        words.append(line[symbol])
+    words = ''.join(words)
+    nums = [int(x) for x in line[21:].strip().split(' ')]
     sec = (nums[0] * 60 * 60) + (nums[1] * 60) + nums[2]
-    return ''.join(words), sec
+    return words, sec
 
 in_file_path = os.path.expanduser(f'{HOME_DIR}/{IN_FILE}')
 with open(in_file_path, 'r') as file:
