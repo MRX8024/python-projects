@@ -15,7 +15,7 @@ def _line_parser(line):
             break
         except ValueError:
             words.append(symbol)
-    nums = ''.join(line[point:]).split(' ')
+    nums = line[point:].split(' ')
     return ''.join(words), nums
 
 in_file_path = os.path.expanduser(f'{HOME_DIR}/{IN_FILE}')
